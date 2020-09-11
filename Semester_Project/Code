@@ -1,0 +1,220 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: LSU,EE DEPT.
+// Engineer: GARRETT BARTON
+// 
+// Create Date:    21:43:45 11/13/2016 
+// Design Name: 	SEMESTER PROJECT FA16
+// Module Name:    BARTON_CODE 
+// Project Name: BARTON
+// Target Devices: BASYS 2
+// Tool versions: 
+// Description: TRAFFIC LIGHT SYSTEM
+//
+// Dependencies: 
+//
+// Revision: 
+// Revision 0.01 - File Created
+// Additional Comments: 
+//
+//////////////////////////////////////////////////////////////////////////////////
+module BARTON_CODE(
+    input NS_sensor,
+    input EW_sensor,
+    input clk,
+	 input resetn,
+    output NS_R,
+    output NS_G,
+    output NS_Y,
+    output EW_R,
+    output EW_G,
+    output EW_Y
+    );
+reg [5:1] t= 5'b00000;/////casing over states
+	parameter [6:1] //EW G Y R // THEN NS G Y R////casing over lights
+			A = 6'b 001100,
+			B = 6'b 001010,
+			C = 6'b 100001,
+			D = 6'b 010001;
+/*	
+			FF= 6'b 001100,//0
+			A = 6'b 001100, //1
+			B = 6'b 001100,//2
+		   C = 6'b 001100,//3
+			D = 6'b 001100,//4
+			E = 6'b 001100,//5
+			F = 6'b 001100,//6
+			G = 6'b 001100,//7
+			H = 6'b 001100,//8
+			I = 6'b 001100,//9
+			J = 6'b 001100,//10
+			K = 6'b 001100,//11
+			////NS CHANGE TO YELLOW
+			L = 6'b 001010,//12
+			M = 6'b 001010,//13
+			N = 6'b 001010,//14
+			O = 6'b 100010,//15
+////////////////////////////////////////////
+			P = 6'b 100001,//00
+			Q = 6'b 100001, //01
+			R = 6'b 100001,//02
+		   S = 6'b 100001,//03
+			T = 6'b 100001,//04
+			U = 6'b 100001,//05
+			V = 6'b 100001,//06
+			W = 6'b 100001,//07
+			X = 6'b 100001,//08
+			Y = 6'b 100001,//09
+			Z = 6'b 100001,//010
+			AA = 6'b 100001,//011
+			////EW CHANGE TO YELLOW
+			BB = 6'b 010001,//012
+			CC = 6'b 010001,//013
+			DD = 6'b 010001,//014
+			EE = 6'b 010001;//015
+*/
+
+// Define the sequential block  
+always @(posedge clk)
+	if (resetn == 1) t <= A;
+	else
+		case(t)
+			5'b00000: case({EW_sensor,NS_sensor})
+					2'b00,2'b01: t <= FF;
+					2'b10,2'b11: t <= A;
+				endcase
+			A: case({EW_sensor,NS_sensor})
+					2'b00,2'b01: t <= A;
+					2'b10,2'b11: t <= B;
+				endcase
+			B: case({EW_sensor,NS_sensor})
+					2'b00,2'b01: t <= B;
+					2'b10,2'b11: t <= C;
+				endcase
+			C: case({EW_sensor,NS_sensor})
+					2'b00,2'b01: t <= C;
+					2'b10,2'b11: t <= D;
+				endcase
+			D: case({EW_sensor,NS_sensor})
+					2'b00,2'b01: t <= D;
+					2'b10,2'b11: t <= E;
+				endcase
+			E: case({EW_sensor,NS_sensor})
+					2'b00,2'b01: t <= E;
+					2'b10,2'b11: t <= F;
+				endcase
+			F: case({EW_sensor,NS_sensor})
+					2'b00,2'b01:t <= F;
+					2'b10,2'b11: t <= G;
+				endcase
+			G: case({EW_sensor,NS_sensor})
+					2'b00,2'b01: t <= G;
+					2'b10,2'b11: t <= H;
+				endcase
+			H: case({EW_sensor,NS_sensor})
+					2'b00,2'b01: t <= H;
+					2'b10,2'b11: t <= I;
+				endcase
+			I: case({EW_sensor,NS_sensor})
+					2'b00,2'b01: t <= I;
+					2'b10,2'b11: t <= J;
+				endcase
+			J: case({EW_sensor,NS_sensor})
+					2'b00,2'b01: t <= J;
+					2'b10,2'b11: t <= K;
+				endcase
+			K: case({EW_sensor,NS_sensor})
+					2'b00,2'b01: t <= K;
+					2'b10,2'b11: t <= L;
+				endcase
+			L: case({EW_sensor,NS_sensor})
+					2'b00,2'b01: t <= L;
+					2'b10,2'b11: t <= M;
+				endcase
+			M: case({EW_sensor,NS_sensor})
+					2'b00,2'b01: t <= M;
+					2'b10,2'b11: t <= N;
+				endcase
+			N: case({EW_sensor,NS_sensor})
+					2'b00,2'b01: t <= N;
+					2'b10,2'b11: t <= O;
+				endcase
+			O: case({EW_sensor,NS_sensor})
+					2'b00,2'b01: t <= O;
+					2'b10,2'b11: t <= P;
+				endcase
+			P: case({EW_sensor,NS_sensor})
+					2'b00,2'b01: t <= P;
+					2'b10,2'b11: t <= Q;
+				endcase
+			Q: case({EW_sensor,NS_sensor})
+					2'b00,2'b01: t <= Q;
+					2'b10,2'b11: t <= R;
+				endcase
+			R: case({EW_sensor,NS_sensor})
+					2'b00,2'b01: t <= R;
+					2'b10,2'b11: t <= S;
+				endcase
+			S: case({EW_sensor,NS_sensor})
+					2'b00,2'b01: t <= S;
+					2'b10,2'b11: t <= T;
+				endcase
+			T: case({EW_sensor,NS_sensor})
+					2'b00,2'b01: t <= T;
+					2'b10,2'b11: t <= U;
+				endcase
+			U: case({EW_sensor,NS_sensor})
+					2'b00,2'b01: t <= U;
+					2'b10,2'b11: t <= V;
+				endcase
+			V: case({EW_sensor,NS_sensor})
+					2'b00,2'b01: t <= V;
+					2'b10,2'b11: t <= W;
+				endcase
+			W: case({EW_sensor,NS_sensor})
+					2'b00,2'b01: t <= W;
+					2'b10,2'b11: t <= X;
+				endcase
+			X: case({EW_sensor,NS_sensor})
+					2'b00,2'b01: t <= X;
+					2'b10,2'b11: t <= Y;
+				endcase
+			Y: case({EW_sensor,NS_sensor})
+					2'b00,2'b01: t <= Y;
+					2'b10,2'b11: t <= Z;
+				endcase
+			Z: case({EW_sensor,NS_sensor})
+					2'b00,2'b01: t <= Z;
+					2'b10,2'b11: t <= AA;
+				endcase
+			AA: case({EW_sensor,NS_sensor})
+					2'b00,2'b01: t <= AA;
+					2'b10,2'b11: t <= BB;
+				endcase
+			BB: case({EW_sensor,NS_sensor})
+					2'b00,2'b01: t <= BB;
+					2'b10,2'b11: t <= CC;
+				endcase
+			CC: case({EW_sensor,NS_sensor})
+					2'b00,2'b01: t <= CC;
+					2'b10,2'b11: t <= DD;
+				endcase
+			DD: case({EW_sensor,NS_sensor})
+					2'b00,2'b01: t <= DD;
+					2'b10,2'b11: t <= EE;
+				endcase
+			EE: case({EW_sensor,NS_sensor})
+					2'b00,2'b01: t <= EE;
+					2'b10,2'b11: t <= FF;
+				endcase
+		endcase
+///////////////////////////////assignments//////////////////////////////
+	assign NS_G = t[1];
+	assign NS_Y = t[2];
+	assign NS_R = t[3];
+	///////////////
+	assign EW_G = t[4];
+	assign EW_Y = t[5];
+	assign EW_R = t[6];
+	endmodule
+	
